@@ -1,0 +1,79 @@
+<div class="device-detail">
+  <a routerLink="/devices" class="device-detail__back">← {{ 'common.back' | translate }}</a>
+
+  @if (isLoading()) {
+    <div class="device-detail__loading">
+      <p>{{ 'common.loading' | translate }}</p>
+    </div>
+  } @else if (error()) {
+    <div class="device-detail__error">
+      <p>{{ error()! | translate }}</p>
+    </div>
+  } @else if (minDetail(); as detail) {
+    <h2 class="device-detail__title">{{ detail.device_sn }}</h2>
+    <p class="device-detail__model">{{ detail.model }} — MIN (TLX)</p>
+
+    <div class="device-detail__stats">
+      <div class="stat-card">
+        <span class="stat-card__label">{{ 'devices.power' | translate }}</span>
+        <span class="stat-card__value">{{ detail.pac }} W</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-card__label">{{ 'devices.today_energy' | translate }}</span>
+        <span class="stat-card__value">{{ detail.eac_today }} kWh</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-card__label">{{ 'devices.total_energy' | translate }}</span>
+        <span class="stat-card__value">{{ detail.eac_total }} kWh</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-card__label">{{ 'devices.temperature' | translate }}</span>
+        <span class="stat-card__value">{{ detail.temperature }} °C</span>
+      </div>
+    </div>
+
+    <div class="device-detail__info">
+      <p><strong>Firmware:</strong> {{ detail.firmware_version }}</p>
+      <p>
+        <strong>{{ 'devices.last_update' | translate }}:</strong> {{ detail.last_update_time }}
+      </p>
+    </div>
+  } @else if (sphDetail(); as detail) {
+    <h2 class="device-detail__title">{{ detail.device_sn }}</h2>
+    <p class="device-detail__model">{{ detail.model }} — SPH (MIX)</p>
+
+    <div class="device-detail__stats">
+      <div class="stat-card">
+        <span class="stat-card__label">{{ 'devices.pv_power' | translate }}</span>
+        <span class="stat-card__value">{{ detail.ppv }} W</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-card__label">{{ 'devices.grid_power' | translate }}</span>
+        <span class="stat-card__value">{{ detail.pac }} W</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-card__label">{{ 'devices.battery_power' | translate }}</span>
+        <span class="stat-card__value">{{ detail.pbat }} W</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-card__label">{{ 'devices.soc' | translate }}</span>
+        <span class="stat-card__value">{{ detail.soc }}%</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-card__label">{{ 'devices.today_energy' | translate }}</span>
+        <span class="stat-card__value">{{ detail.eac_today }} kWh</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-card__label">{{ 'devices.load' | translate }}</span>
+        <span class="stat-card__value">{{ detail.pload }} W</span>
+      </div>
+    </div>
+
+    <div class="device-detail__info">
+      <p><strong>Firmware:</strong> {{ detail.firmware_version }}</p>
+      <p>
+        <strong>{{ 'devices.last_update' | translate }}:</strong> {{ detail.last_update_time }}
+      </p>
+    </div>
+  }
+</div>

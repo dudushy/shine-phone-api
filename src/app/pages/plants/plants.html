@@ -1,0 +1,30 @@
+<div class="plants">
+  <h2 class="plants__title">{{ 'plants.title' | translate }}</h2>
+
+  @if (isLoading()) {
+    <div class="plants__loading">
+      <p>{{ 'common.loading' | translate }}</p>
+    </div>
+  } @else if (error()) {
+    <div class="plants__error">
+      <p>{{ error()! | translate }}</p>
+    </div>
+  } @else {
+    <div class="plants__grid">
+      @for (plant of plants(); track plant.plant_id) {
+        <a class="plant-card" [routerLink]="['/plants', plant.plant_id]">
+          <h3 class="plant-card__name">{{ plant.plant_name }}</h3>
+          <div class="plant-card__info">
+            <span>{{ plant.country }} - {{ plant.city }}</span>
+            <span class="plant-card__power">{{ plant.current_power }} W</span>
+          </div>
+          <div class="plant-card__energy">
+            <span>{{ 'plants.total_energy' | translate }}: {{ plant.total_energy }} kWh</span>
+          </div>
+        </a>
+      } @empty {
+        <p class="plants__empty">{{ 'plants.empty' | translate }}</p>
+      }
+    </div>
+  }
+</div>

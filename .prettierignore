@@ -1,0 +1,9 @@
+/.angular/
+/coverage/
+/dist/
+/node_modules/
+/public/assets/version.json
+/src/lib/environments/version.ts
+/src/lib/environments/environment.ts
+/package-lock.json
+/graphify-out/

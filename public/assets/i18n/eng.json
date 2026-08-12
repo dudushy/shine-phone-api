@@ -1,0 +1,62 @@
+{
+  "nav": {
+    "dashboard": "Dashboard",
+    "plants": "Plants",
+    "devices": "Devices"
+  },
+  "common": {
+    "loading": "Loading...",
+    "back": "Back",
+    "error": "Error loading data",
+    "empty": "No data found"
+  },
+  "dashboard": {
+    "title": "Dashboard",
+    "today_energy": "Today Energy",
+    "month_energy": "Month Energy",
+    "total_energy": "Total Energy",
+    "current_power": "Current Power",
+    "plants_count": "Registered plants",
+    "error_loading": "Error loading dashboard data"
+  },
+  "plants": {
+    "title": "Plants",
+    "total_energy": "Total Energy",
+    "total_income": "Total Income",
+    "devices": "Devices",
+    "empty": "No plants registered",
+    "error_loading": "Error loading plant list",
+    "error_loading_detail": "Error loading plant details"
+  },
+  "devices": {
+    "title": "Devices",
+    "power": "Power",
+    "today_energy": "Today Energy",
+    "total_energy": "Total Energy",
+    "temperature": "Temperature",
+    "pv_power": "PV Power",
+    "grid_power": "Grid Power",
+    "battery_power": "Battery Power",
+    "soc": "State of Charge",
+    "load": "Load",
+    "last_update": "Last Update",
+    "empty": "No devices found",
+    "error_loading": "Error loading devices",
+    "error_loading_detail": "Error loading device details"
+  },
+  "api_errors": {
+    "success": "Success",
+    "invalid_token": "Invalid token",
+    "token_expired": "Token expired",
+    "invalid_parameter": "Invalid parameter",
+    "device_not_found": "Device not found",
+    "plant_not_found": "Plant not found",
+    "permission_denied": "Permission denied",
+    "internal_error": "Internal server error",
+    "service_unavailable": "Service unavailable",
+    "request_timeout": "Request timeout",
+    "invalid_request": "Invalid request",
+    "data_not_found": "Data not found",
+    "frequently_access": "Too many requests — please wait a few minutes and try again"
+  }
+}

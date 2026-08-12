@@ -1,0 +1,62 @@
+{
+  "nav": {
+    "dashboard": "Dashboard",
+    "plants": "Plantas",
+    "devices": "Dispositivos"
+  },
+  "common": {
+    "loading": "Carregando...",
+    "back": "Voltar",
+    "error": "Erro ao carregar dados",
+    "empty": "Nenhum dado encontrado"
+  },
+  "dashboard": {
+    "title": "Dashboard",
+    "today_energy": "Energia Hoje",
+    "month_energy": "Energia do Mês",
+    "total_energy": "Energia Total",
+    "current_power": "Potência Atual",
+    "plants_count": "Plantas cadastradas",
+    "error_loading": "Erro ao carregar dados do dashboard"
+  },
+  "plants": {
+    "title": "Plantas",
+    "total_energy": "Energia Total",
+    "total_income": "Receita Total",
+    "devices": "Dispositivos",
+    "empty": "Nenhuma planta cadastrada",
+    "error_loading": "Erro ao carregar lista de plantas",
+    "error_loading_detail": "Erro ao carregar detalhes da planta"
+  },
+  "devices": {
+    "title": "Dispositivos",
+    "power": "Potência",
+    "today_energy": "Energia Hoje",
+    "total_energy": "Energia Total",
+    "temperature": "Temperatura",
+    "pv_power": "Potência PV",
+    "grid_power": "Potência Rede",
+    "battery_power": "Potência Bateria",
+    "soc": "Estado de Carga",
+    "load": "Carga",
+    "last_update": "Última atualização",
+    "empty": "Nenhum dispositivo encontrado",
+    "error_loading": "Erro ao carregar dispositivos",
+    "error_loading_detail": "Erro ao carregar detalhes do dispositivo"
+  },
+  "api_errors": {
+    "success": "Sucesso",
+    "invalid_token": "Token inválido",
+    "token_expired": "Token expirado",
+    "invalid_parameter": "Parâmetro inválido",
+    "device_not_found": "Dispositivo não encontrado",
+    "plant_not_found": "Planta não encontrada",
+    "permission_denied": "Permissão negada",
+    "internal_error": "Erro interno do servidor",
+    "service_unavailable": "Serviço indisponível",
+    "request_timeout": "Tempo de requisição esgotado",
+    "invalid_request": "Requisição inválida",
+    "data_not_found": "Dados não encontrados",
+    "frequently_access": "Acesso muito frequente — aguarde alguns minutos e tente novamente"
+  }
+}

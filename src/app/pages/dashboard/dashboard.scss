@@ -1,0 +1,61 @@
+@use '@shyland-dev/ui/styles' as *;
+
+.dashboard {
+  &__title {
+    font-size: var(--font-size-xl);
+    margin-bottom: var(--spacing-lg);
+  }
+
+  &__loading,
+  &__error {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--spacing-xxl);
+    color: var(--color-text-secondary);
+  }
+
+  &__error {
+    color: var(--color-error);
+  }
+
+  &__stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(calc(#{$responsive-unit} * 100), 1fr));
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-lg);
+  }
+
+  &__plants {
+    h3 {
+      font-size: var(--font-size-lg);
+      color: var(--color-text-secondary);
+    }
+  }
+}
+
+.stat-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+  padding: var(--spacing-lg);
+  background-color: var(--color-surface);
+  border-radius: var(--border-radius-lg);
+  box-shadow: var(--shadow-md);
+  border-width: calc(#{$responsive-unit} * 1);
+  border-style: solid;
+  border-color: var(--color-border);
+
+  &__label {
+    font-size: var(--font-size-sm);
+    color: var(--color-text-secondary);
+    text-transform: uppercase;
+    letter-spacing: calc(#{$responsive-unit} * 0.5);
+  }
+
+  &__value {
+    font-size: var(--font-size-xl);
+    font-weight: 700;
+    color: var(--color-primary);
+  }
+}

@@ -1,0 +1,39 @@
+<header class="header">
+  <button class="header__menu-btn" (click)="toggleSideMenu()" aria-label="Menu">
+    <shy-icon>list</shy-icon>
+  </button>
+  <h1 class="header__title">Shine Phone API</h1>
+  <button class="header__theme-btn" (click)="toggleTheme()" aria-label="Alternar tema">
+    <shy-icon>moon-stars</shy-icon>
+  </button>
+</header>
+
+@if (isSideMenuOpen) {
+  <div
+    class="sidenav-backdrop"
+    (click)="closeSideMenu()"
+    (keydown.escape)="closeSideMenu()"
+    role="button"
+    tabindex="0"
+    aria-label="Fechar menu"
+  ></div>
+}
+
+<nav class="sidenav" [class.sidenav--open]="isSideMenuOpen" role="navigation">
+  <div class="sidenav__content">
+    <a routerLink="/dashboard" routerLinkActive="active" (click)="closeSideMenu()">
+      {{ 'nav.dashboard' | translate }}
+    </a>
+    <a routerLink="/plants" routerLinkActive="active" (click)="closeSideMenu()">
+      {{ 'nav.plants' | translate }}
+    </a>
+    <a routerLink="/devices" routerLinkActive="active" (click)="closeSideMenu()">
+      {{ 'nav.devices' | translate }}
+    </a>
+    <span class="sidenav__version">v{{ version }}</span>
+  </div>
+</nav>
+
+<main class="main">
+  <router-outlet />
+</main>

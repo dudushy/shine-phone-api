@@ -1,0 +1,88 @@
+@use '@shyland-dev/ui/styles' as *;
+
+.devices {
+  &__title {
+    font-size: var(--font-size-xl);
+    margin-bottom: var(--spacing-lg);
+  }
+
+  &__loading,
+  &__error {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--spacing-xxl);
+    color: var(--color-text-secondary);
+  }
+
+  &__error {
+    color: var(--color-error);
+  }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(calc(#{$responsive-unit} * 150), 1fr));
+    gap: var(--spacing-md);
+  }
+
+  &__empty {
+    text-align: center;
+    padding: var(--spacing-xxl);
+    color: var(--color-text-secondary);
+  }
+}
+
+.device-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+  padding: var(--spacing-lg);
+  background-color: var(--color-surface);
+  border-radius: var(--border-radius-lg);
+  box-shadow: var(--shadow-md);
+  border-width: calc(#{$responsive-unit} * 1);
+  border-style: solid;
+  border-color: var(--color-border);
+  color: var(--color-text);
+  transition:
+    transform var(--transition-fast),
+    box-shadow var(--transition-fast);
+
+  &:hover {
+    transform: translateY(calc(#{$responsive-unit} * -2));
+    box-shadow: var(--shadow-lg);
+    color: var(--color-text);
+  }
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &__name {
+    font-size: var(--font-size-lg);
+    font-weight: 600;
+  }
+
+  &__type {
+    font-size: var(--font-size-xs);
+    padding-block: var(--spacing-xs);
+    padding-inline: var(--spacing-sm);
+    background-color: var(--color-primary-light);
+    color: #ffffff;
+    border-radius: var(--border-radius-sm);
+    font-weight: 500;
+  }
+
+  &__sn {
+    font-size: var(--font-size-sm);
+    font-family: monospace;
+    color: var(--color-text-secondary);
+  }
+
+  &__update {
+    font-size: var(--font-size-xs);
+    color: var(--color-text-secondary);
+  }
+}

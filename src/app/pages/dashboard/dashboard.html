@@ -1,0 +1,38 @@
+<div class="dashboard">
+  <h2 class="dashboard__title">{{ 'dashboard.title' | translate }}</h2>
+
+  @if (isLoading()) {
+    <div class="dashboard__loading">
+      <p>{{ 'common.loading' | translate }}</p>
+    </div>
+  } @else if (error()) {
+    <div class="dashboard__error">
+      <p>{{ error()! | translate }}</p>
+    </div>
+  } @else {
+    <div class="dashboard__stats">
+      @if (energyOverview(); as overview) {
+        <div class="stat-card">
+          <span class="stat-card__label">{{ 'dashboard.today_energy' | translate }}</span>
+          <span class="stat-card__value">{{ overview.today_energy }} kWh</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-card__label">{{ 'dashboard.month_energy' | translate }}</span>
+          <span class="stat-card__value">{{ overview.month_energy }} kWh</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-card__label">{{ 'dashboard.total_energy' | translate }}</span>
+          <span class="stat-card__value">{{ overview.total_energy }} kWh</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-card__label">{{ 'dashboard.current_power' | translate }}</span>
+          <span class="stat-card__value">{{ overview.current_power }} W</span>
+        </div>
+      }
+    </div>
+
+    <div class="dashboard__plants">
+      <h3>{{ 'dashboard.plants_count' | translate }}: {{ plants().length }}</h3>
+    </div>
+  }
+</div>
