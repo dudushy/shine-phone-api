@@ -15,7 +15,8 @@ export class DeviceDetail implements OnInit {
   private growattApi = inject(GrowattApiService);
   private route = inject(ActivatedRoute);
 
-  readonly deviceData = signal<MinDetail | SphDetail | null>(null);
+  readonly minData = signal<MinDetail | null>(null);
+  readonly sphData = signal<SphDetail | null>(null);
   readonly deviceType = signal<number>(0);
   readonly isLoading = signal(true);
   readonly error = signal<string | null>(null);
@@ -34,7 +35,6 @@ export class DeviceDetail implements OnInit {
   private findDeviceType(sn: string): void {
     this.isLoading.set(true);
 
-    // Buscar plantas e depois devices para descobrir o tipo
     this.growattApi.getPlantList().subscribe({
       next: (response) => {
         const plants = response.data.plants ?? [];
@@ -51,15 +51,11 @@ export class DeviceDetail implements OnInit {
                 this.isLoading.set(false);
               }
             },
-            error: (err) => {
-              this.handleError(err);
-            },
+            error: (err) => this.handleError(err),
           });
         }
       },
-      error: (err) => {
-        this.handleError(err);
-      },
+      error: (err) => this.handleError(err),
     });
   }
 
@@ -69,7 +65,7 @@ export class DeviceDetail implements OnInit {
       this.growattApi.getMinDetail(sn).subscribe({
         next: (response) => {
           this.debugService.log(this, 'min detail loaded', response);
-          this.deviceData.set(response.data);
+          this.minData.set(response.data);
           this.isLoading.set(false);
         },
         error: (err) => this.handleError(err),
@@ -79,13 +75,12 @@ export class DeviceDetail implements OnInit {
       this.growattApi.getSphDetail(sn).subscribe({
         next: (response) => {
           this.debugService.log(this, 'sph detail loaded', response);
-          this.deviceData.set(response.data);
+          this.sphData.set(response.data);
           this.isLoading.set(false);
         },
         error: (err) => this.handleError(err),
       });
     } else {
-      // Tipo não suportado ainda
       this.error.set('devices.error_loading_detail');
       this.isLoading.set(false);
     }

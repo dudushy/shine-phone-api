@@ -9,87 +9,92 @@
     <div class="device-detail__error">
       <p>{{ error()! | translate }}</p>
     </div>
-  } @else if (deviceData(); as data) {
+  } @else if (minData(); as data) {
     <h2 class="device-detail__title">{{ deviceSn() }}</h2>
-    <p class="device-detail__model">
-      Tipo: {{ deviceType() === 7 ? 'MIN (TLX)' : deviceType() === 5 ? 'SPH (MIX)' : 'Device' }}
-    </p>
+    <p class="device-detail__model">MIN (TLX) — String Inverter</p>
 
-    @if (deviceType() === 7) {
-      <div class="device-detail__stats">
-        <div class="stat-card">
-          <span class="stat-card__label">{{ 'devices.pv_power' | translate }}</span>
-          <span class="stat-card__value">{{ data.ppv ?? 0 }} W</span>
-        </div>
-        <div class="stat-card">
-          <span class="stat-card__label">{{ 'devices.power' | translate }} AC</span>
-          <span class="stat-card__value">{{ data.pac ?? data.pac1 ?? 0 }} W</span>
-        </div>
-        <div class="stat-card">
-          <span class="stat-card__label">{{ 'devices.today_energy' | translate }}</span>
-          <span class="stat-card__value">{{ data.eacToday ?? 0 }} kWh</span>
-        </div>
-        <div class="stat-card">
-          <span class="stat-card__label">{{ 'devices.total_energy' | translate }}</span>
-          <span class="stat-card__value">{{ data.eacTotal ?? 0 }} kWh</span>
-        </div>
-        <div class="stat-card">
-          <span class="stat-card__label">PV1</span>
-          <span class="stat-card__value">{{ data.vpv1 ?? 0 }} V / {{ data.ipv1 ?? 0 }} A</span>
-        </div>
-        <div class="stat-card">
-          <span class="stat-card__label">PV2</span>
-          <span class="stat-card__value">{{ data.vpv2 ?? 0 }} V / {{ data.ipv2 ?? 0 }} A</span>
-        </div>
-        <div class="stat-card">
-          <span class="stat-card__label">AC</span>
-          <span class="stat-card__value">{{ data.vac1 ?? 0 }} V / {{ data.fac ?? 0 }} Hz</span>
-        </div>
-        <div class="stat-card">
-          <span class="stat-card__label">{{ 'devices.temperature' | translate }}</span>
-          <span class="stat-card__value">{{ data.temp1 ?? 0 }} °C</span>
-        </div>
+    <div class="device-detail__stats">
+      <div class="stat-card">
+        <span class="stat-card__label">{{ 'devices.pv_power' | translate }}</span>
+        <span class="stat-card__value">{{ data.ppv }} W</span>
       </div>
-    } @else if (deviceType() === 5) {
-      <div class="device-detail__stats">
-        <div class="stat-card">
-          <span class="stat-card__label">{{ 'devices.pv_power' | translate }}</span>
-          <span class="stat-card__value">{{ data.ppv ?? 0 }} W</span>
-        </div>
-        <div class="stat-card">
-          <span class="stat-card__label">{{ 'devices.grid_power' | translate }}</span>
-          <span class="stat-card__value">{{ data.pac ?? data.pac1 ?? 0 }} W</span>
-        </div>
-        <div class="stat-card">
-          <span class="stat-card__label">{{ 'devices.soc' | translate }}</span>
-          <span class="stat-card__value">{{ data.soc ?? 0 }}%</span>
-        </div>
-        <div class="stat-card">
-          <span class="stat-card__label">{{ 'devices.battery_power' | translate }}</span>
-          <span class="stat-card__value">{{ data.vbat ?? 0 }} V</span>
-        </div>
-        <div class="stat-card">
-          <span class="stat-card__label">{{ 'devices.today_energy' | translate }}</span>
-          <span class="stat-card__value">{{ data.eacToday ?? 0 }} kWh</span>
-        </div>
-        <div class="stat-card">
-          <span class="stat-card__label">Exportada (Total)</span>
-          <span class="stat-card__value">{{ data.etogridTotal ?? 0 }} kWh</span>
-        </div>
-        <div class="stat-card">
-          <span class="stat-card__label">Carregamento Hoje</span>
-          <span class="stat-card__value">{{ data.echarge1Today ?? 0 }} kWh</span>
-        </div>
-        <div class="stat-card">
-          <span class="stat-card__label">{{ 'devices.temperature' | translate }}</span>
-          <span class="stat-card__value">{{ data.batteryTemperature ?? 0 }} °C</span>
-        </div>
+      <div class="stat-card">
+        <span class="stat-card__label">{{ 'devices.power' | translate }} AC</span>
+        <span class="stat-card__value">{{ data.pac }} W</span>
       </div>
-    }
+      <div class="stat-card">
+        <span class="stat-card__label">{{ 'devices.today_energy' | translate }}</span>
+        <span class="stat-card__value">{{ data.eacToday }} kWh</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-card__label">{{ 'devices.total_energy' | translate }}</span>
+        <span class="stat-card__value">{{ data.eacTotal }} kWh</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-card__label">PV1</span>
+        <span class="stat-card__value">{{ data.vpv1 }} V / {{ data.ipv1 }} A</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-card__label">PV2</span>
+        <span class="stat-card__value">{{ data.vpv2 }} V / {{ data.ipv2 }} A</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-card__label">AC</span>
+        <span class="stat-card__value">{{ data.vac1 }} V / {{ data.fac }} Hz</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-card__label">{{ 'devices.temperature' | translate }}</span>
+        <span class="stat-card__value">{{ data.temp1 }} °C</span>
+      </div>
+    </div>
 
     <div class="device-detail__info">
       <p>
-        <strong>{{ 'devices.last_update' | translate }}:</strong> {{ data.time ?? '—' }}
+        <strong>{{ 'devices.last_update' | translate }}:</strong> {{ data.time }}
+      </p>
+    </div>
+  } @else if (sphData(); as data) {
+    <h2 class="device-detail__title">{{ deviceSn() }}</h2>
+    <p class="device-detail__model">SPH (MIX) — Hybrid Inverter</p>
+
+    <div class="device-detail__stats">
+      <div class="stat-card">
+        <span class="stat-card__label">{{ 'devices.pv_power' | translate }}</span>
+        <span class="stat-card__value">{{ data.ppv }} W</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-card__label">{{ 'devices.grid_power' | translate }}</span>
+        <span class="stat-card__value">{{ data.pac }} W</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-card__label">{{ 'devices.soc' | translate }}</span>
+        <span class="stat-card__value">{{ data.soc }}%</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-card__label">{{ 'devices.battery_power' | translate }}</span>
+        <span class="stat-card__value">{{ data.vbat }} V</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-card__label">{{ 'devices.today_energy' | translate }}</span>
+        <span class="stat-card__value">{{ data.eacToday }} kWh</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-card__label">Exportada (Total)</span>
+        <span class="stat-card__value">{{ data.etogridTotal }} kWh</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-card__label">Carregamento Hoje</span>
+        <span class="stat-card__value">{{ data.echarge1Today }} kWh</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-card__label">{{ 'devices.temperature' | translate }}</span>
+        <span class="stat-card__value">{{ data.batteryTemperature }} °C</span>
+      </div>
+    </div>
+
+    <div class="device-detail__info">
+      <p>
+        <strong>{{ 'devices.last_update' | translate }}:</strong> {{ data.time }}
       </p>
     </div>
   }

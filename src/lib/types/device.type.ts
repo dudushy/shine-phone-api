@@ -31,56 +31,55 @@ export interface DeviceListData {
   count: number;
 }
 
-export interface MinEnergy {
+// Dados real-time do MIN (TLX) - type 7
+// Campos baseados no response real da API /v1/device/tlx/tlx_last_data
+export interface MinDetail {
+  ppv: number;
   pac: number;
-  eac_today: number;
-  eac_total: number;
+  pac1: number;
+  eacToday: number;
+  eacTotal: number;
   vpv1: number;
   vpv2: number;
   ipv1: number;
   ipv2: number;
   vac1: number;
-  iac1: number;
   fac: number;
-  temperature: number;
+  temp1: number;
+  temp5: number;
+  time: string;
+  serialNum: string;
+  realOPPercent: number;
+  [key: string]: unknown; // Campos adicionais variáveis por modelo
 }
 
-export interface MinDetail extends MinEnergy {
-  device_sn: string;
-  status: number;
-  last_update_time: string;
-  firmware_version: string;
-  model: string;
-  communication_version: string;
+// Dados real-time do SPH (MIX) - type 5
+// Campos baseados no response real da API /v1/device/mix/mix_last_data
+export interface SphDetail {
+  ppv: number;
+  pac: number;
+  pac1: number;
+  soc: number;
+  vbat: number;
+  eacToday: number;
+  eacTotal: number;
+  etogridTotal: number;
+  echarge1Today: number;
+  epv1Today: number;
+  epvTotal: number;
+  batteryTemperature: number;
+  time: string;
+  [key: string]: unknown; // Campos adicionais variáveis por modelo
 }
+
+// Aliases para compatibilidade (MinEnergy = MinDetail, SphEnergy = SphDetail)
+export type MinEnergy = MinDetail;
+export type SphEnergy = SphDetail;
 
 export interface MinEnergyHistory {
   time: string;
   pac: number;
-  eac_today: number;
-}
-
-export interface SphEnergy {
-  ppv: number;
-  pac: number;
-  pload: number;
-  pbat: number;
-  soc: number;
-  eac_today: number;
-  eac_total: number;
-  echarge_today: number;
-  edischarge_today: number;
-  grid_import_today: number;
-  grid_export_today: number;
-}
-
-export interface SphDetail extends SphEnergy {
-  device_sn: string;
-  status: number;
-  last_update_time: string;
-  firmware_version: string;
-  model: string;
-  communication_version: string;
+  eacToday: number;
 }
 
 export interface SphEnergyHistory {
@@ -88,7 +87,7 @@ export interface SphEnergyHistory {
   ppv: number;
   pac: number;
   soc: number;
-  eac_today: number;
+  eacToday: number;
 }
 
 export interface DeviceParameter {
