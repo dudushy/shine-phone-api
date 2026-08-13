@@ -2,7 +2,14 @@ import { Component, OnInit, inject, signal } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { DebugService } from '@shyland-dev/utils';
 import { TranslateModule } from '@ngx-translate/core';
-import { GrowattApiService, PlantDetails, PlantEnergyOverview, Device } from '@shine-phone-api';
+import {
+  GrowattApiService,
+  Plant,
+  PlantEnergyOverview,
+  Device,
+  GrowattApiError,
+  API_ERROR_CODES,
+} from '@shine-phone-api';
 
 @Component({
   selector: 'spa-plant-detail',
@@ -15,7 +22,7 @@ export class PlantDetail implements OnInit {
   private growattApi = inject(GrowattApiService);
   private route = inject(ActivatedRoute);
 
-  readonly plant = signal<PlantDetails | null>(null);
+  readonly plant = signal<Plant | null>(null);
   readonly energyOverview = signal<PlantEnergyOverview | null>(null);
   readonly devices = signal<Device[]>([]);
   readonly isLoading = signal(true);
@@ -33,16 +40,27 @@ export class PlantDetail implements OnInit {
   private loadPlantData(plantId: string): void {
     this.isLoading.set(true);
 
-    this.growattApi.getPlantDetails(plantId).subscribe({
+    // Buscar planta da lista (a API não tem endpoint separado de detalhes)
+    this.growattApi.getPlantList().subscribe({
       next: (response) => {
-        this.debugService.log(this, 'plant details loaded', response);
-        this.plant.set(response.data);
-        this.loadEnergyOverview(plantId);
-        this.loadDevices(plantId);
+        this.debugService.log(this, 'plant list loaded', response);
+        const plant = response.data?.plants?.find((p) => p.plant_id.toString() === plantId);
+        if (plant) {
+          this.plant.set(plant);
+          this.loadEnergyOverview(plantId);
+          this.loadDevices(plantId);
+        } else {
+          this.error.set('plants.error_not_found');
+          this.isLoading.set(false);
+        }
       },
       error: (err) => {
         this.debugService.log(this, 'error', err);
-        this.error.set('plants.error_loading_detail');
+        if (err instanceof GrowattApiError) {
+          this.error.set(API_ERROR_CODES[err.errorCode] ?? 'common.error');
+        } else {
+          this.error.set('plants.error_loading_detail');
+        }
         this.isLoading.set(false);
       },
     });
@@ -51,10 +69,14 @@ export class PlantDetail implements OnInit {
   private loadEnergyOverview(plantId: string): void {
     this.growattApi.getPlantEnergyOverview(plantId).subscribe({
       next: (response) => {
+        this.debugService.log(this, 'energy overview loaded', response);
         this.energyOverview.set(response.data);
       },
       error: (err) => {
         this.debugService.log(this, 'error loading overview', err);
+        if (err instanceof GrowattApiError) {
+          this.error.set(API_ERROR_CODES[err.errorCode] ?? 'common.error');
+        }
       },
     });
   }
@@ -63,11 +85,14 @@ export class PlantDetail implements OnInit {
     this.growattApi.getDeviceList(plantId).subscribe({
       next: (response) => {
         this.debugService.log(this, 'devices loaded', response);
-        this.devices.set(response.data ?? []);
+        this.devices.set(response.data?.devices ?? []);
         this.isLoading.set(false);
       },
       error: (err) => {
         this.debugService.log(this, 'error loading devices', err);
+        if (err instanceof GrowattApiError) {
+          this.error.set(API_ERROR_CODES[err.errorCode] ?? 'common.error');
+        }
         this.isLoading.set(false);
       },
     });

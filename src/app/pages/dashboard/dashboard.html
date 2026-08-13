@@ -10,26 +10,44 @@
       <p>{{ error()! | translate }}</p>
     </div>
   } @else {
-    <div class="dashboard__stats">
-      @if (energyOverview(); as overview) {
+    @if (plants().length) {
+      <div class="dashboard__plant-info">
+        <h3 class="dashboard__plant-name">{{ plants()[0].name }}</h3>
+        <p class="dashboard__plant-location">{{ plants()[0].city }}, {{ plants()[0].country }}</p>
+        <p class="dashboard__plant-peak">{{ 'dashboard.peak_power' | translate }}: {{ plants()[0].peak_power }} kWp</p>
+      </div>
+    }
+
+    @if (energyOverview(); as overview) {
+      <div class="dashboard__stats">
+        <div class="stat-card">
+          <span class="stat-card__label">{{ 'dashboard.current_power' | translate }}</span>
+          <span class="stat-card__value">{{ overview.current_power }} W</span>
+        </div>
         <div class="stat-card">
           <span class="stat-card__label">{{ 'dashboard.today_energy' | translate }}</span>
           <span class="stat-card__value">{{ overview.today_energy }} kWh</span>
         </div>
         <div class="stat-card">
-          <span class="stat-card__label">{{ 'dashboard.month_energy' | translate }}</span>
-          <span class="stat-card__value">{{ overview.month_energy }} kWh</span>
+          <span class="stat-card__label">{{ 'dashboard.monthly_energy' | translate }}</span>
+          <span class="stat-card__value">{{ overview.monthly_energy }} kWh</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-card__label">{{ 'dashboard.yearly_energy' | translate }}</span>
+          <span class="stat-card__value">{{ overview.yearly_energy }} kWh</span>
         </div>
         <div class="stat-card">
           <span class="stat-card__label">{{ 'dashboard.total_energy' | translate }}</span>
           <span class="stat-card__value">{{ overview.total_energy }} kWh</span>
         </div>
         <div class="stat-card">
-          <span class="stat-card__label">{{ 'dashboard.current_power' | translate }}</span>
-          <span class="stat-card__value">{{ overview.current_power }} W</span>
+          <span class="stat-card__label">{{ 'dashboard.carbon_offset' | translate }}</span>
+          <span class="stat-card__value">{{ overview.carbon_offset }} kg</span>
         </div>
-      }
-    </div>
+      </div>
+
+      <p class="dashboard__last-update">{{ 'dashboard.last_update' | translate }}: {{ overview.last_update_time }}</p>
+    }
 
     <div class="dashboard__plants">
       <h3>{{ 'dashboard.plants_count' | translate }}: {{ plants().length }}</h3>

@@ -30,11 +30,11 @@ export class Dashboard implements OnInit {
     this.growattApi.getPlantList().subscribe({
       next: (response) => {
         this.debugService.log(this, 'plants loaded', response);
-        this.plants.set(response.data ?? []);
+        this.plants.set(response.data?.plants ?? []);
 
         // Carregar overview da primeira planta
-        if (response.data?.length) {
-          this.loadEnergyOverview(response.data[0].plant_id);
+        if (response.data?.plants?.length) {
+          this.loadEnergyOverview(response.data.plants[0].plant_id.toString());
         } else {
           this.isLoading.set(false);
         }
@@ -60,6 +60,11 @@ export class Dashboard implements OnInit {
       },
       error: (err) => {
         this.debugService.log(this, 'error loading energy overview', err);
+        if (err instanceof GrowattApiError) {
+          this.error.set(API_ERROR_CODES[err.errorCode] ?? 'common.error');
+        } else {
+          this.error.set('dashboard.error_loading');
+        }
         this.isLoading.set(false);
       },
     });

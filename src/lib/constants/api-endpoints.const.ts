@@ -3,8 +3,7 @@
 export const API_ENDPOINTS = {
   // Genéricos (plantas)
   PLANT_LIST: 'plant/list',
-  PLANT_DETAILS: 'plant/details',
-  PLANT_ENERGY_OVERVIEW: 'plant/energy/overview',
+  PLANT_DATA: 'plant/data',
   PLANT_ENERGY_HISTORY: 'plant/energy/history',
   DEVICE_LIST: 'device/list',
 

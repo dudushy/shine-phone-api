@@ -26,6 +26,33 @@
     margin-bottom: var(--spacing-lg);
   }
 
+  &__plant-info {
+    margin-bottom: var(--spacing-lg);
+  }
+
+  &__plant-name {
+    font-size: var(--font-size-lg);
+    font-weight: 600;
+    margin-bottom: var(--spacing-xs);
+  }
+
+  &__plant-location {
+    font-size: var(--font-size-md);
+    color: var(--color-text-secondary);
+    margin-bottom: var(--spacing-xs);
+  }
+
+  &__plant-peak {
+    font-size: var(--font-size-sm);
+    color: var(--color-text-secondary);
+  }
+
+  &__last-update {
+    font-size: var(--font-size-sm);
+    color: var(--color-text-secondary);
+    margin-top: var(--spacing-md);
+  }
+
   &__plants {
     h3 {
       font-size: var(--font-size-lg);

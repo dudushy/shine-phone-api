@@ -2,7 +2,7 @@ import { Component, OnInit, inject, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { DebugService } from '@shyland-dev/utils';
 import { TranslateModule } from '@ngx-translate/core';
-import { GrowattApiService, Plant } from '@shine-phone-api';
+import { GrowattApiService, Plant, GrowattApiError, API_ERROR_CODES } from '@shine-phone-api';
 
 @Component({
   selector: 'spa-plants',
@@ -29,12 +29,16 @@ export class Plants implements OnInit {
     this.growattApi.getPlantList().subscribe({
       next: (response) => {
         this.debugService.log(this, 'plants loaded', response);
-        this.plants.set(response.data ?? []);
+        this.plants.set(response.data?.plants ?? []);
         this.isLoading.set(false);
       },
       error: (err) => {
         this.debugService.log(this, 'error', err);
-        this.error.set('plants.error_loading');
+        if (err instanceof GrowattApiError) {
+          this.error.set(API_ERROR_CODES[err.errorCode] ?? 'common.error');
+        } else {
+          this.error.set('plants.error_loading');
+        }
         this.isLoading.set(false);
       },
     });

@@ -13,13 +13,17 @@
     <div class="plants__grid">
       @for (plant of plants(); track plant.plant_id) {
         <a class="plant-card" [routerLink]="['/plants', plant.plant_id]">
-          <h3 class="plant-card__name">{{ plant.plant_name }}</h3>
+          <h3 class="plant-card__name">{{ plant.name }}</h3>
           <div class="plant-card__info">
-            <span>{{ plant.country }} - {{ plant.city }}</span>
-            <span class="plant-card__power">{{ plant.current_power }} W</span>
+            <span>{{ plant.city }}, {{ plant.country }}</span>
+            <span class="plant-card__status">{{ 'plants.status_' + plant.status | translate }}</span>
           </div>
           <div class="plant-card__energy">
+            <span>{{ 'plants.current_power' | translate }}: {{ plant.current_power }} W</span>
             <span>{{ 'plants.total_energy' | translate }}: {{ plant.total_energy }} kWh</span>
+          </div>
+          <div class="plant-card__date">
+            <span>{{ 'plants.created' | translate }}: {{ plant.create_date }}</span>
           </div>
         </a>
       } @empty {

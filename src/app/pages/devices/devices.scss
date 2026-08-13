@@ -75,14 +75,64 @@
     font-weight: 500;
   }
 
-  &__sn {
+  &__body {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xs);
+  }
+
+  &__row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     font-size: var(--font-size-sm);
-    font-family: monospace;
+  }
+
+  &__label {
     color: var(--color-text-secondary);
+  }
+
+  &__value {
+    font-weight: 500;
+  }
+
+  &__footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: var(--spacing-sm);
   }
 
   &__update {
     font-size: var(--font-size-xs);
     color: var(--color-text-secondary);
+  }
+
+  &__status {
+    font-size: var(--font-size-xs);
+    padding-block: var(--spacing-xs);
+    padding-inline: var(--spacing-sm);
+    border-radius: var(--border-radius-sm);
+    font-weight: 500;
+
+    &.status--online {
+      background-color: var(--color-success);
+      color: #ffffff;
+    }
+
+    &.status--standby {
+      background-color: var(--color-warning);
+      color: #1f1f1f;
+    }
+
+    &.status--fault {
+      background-color: var(--color-error);
+      color: #ffffff;
+    }
+
+    &.status--disconnected {
+      background-color: var(--color-border);
+      color: var(--color-text-secondary);
+    }
   }
 }

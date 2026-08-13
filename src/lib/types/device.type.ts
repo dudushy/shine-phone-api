@@ -1,16 +1,34 @@
 // Tipos relacionados a dispositivos (inversores)
 
 export enum DeviceType {
+  INVERTER = 1,
+  ENERGY_STORAGE = 2,
+  OTHER = 3,
+  MAX = 4,
   SPH = 5,
+  SPA = 6,
   MIN = 7,
+  PCS = 8,
+  HPS = 9,
+  PBD = 10,
 }
 
 export interface Device {
   device_sn: string;
-  device_name: string;
-  device_type: DeviceType;
+  device_id: number | string;
+  device_type?: DeviceType;
+  type: number;
   status: number;
+  lost: boolean;
+  model: string;
+  manufacturer: string;
+  datalogger_sn: string;
   last_update_time: string;
+}
+
+export interface DeviceListData {
+  devices: Device[];
+  count: number;
 }
 
 export interface MinEnergy {

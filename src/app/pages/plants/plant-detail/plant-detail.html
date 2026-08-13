@@ -10,28 +10,44 @@
       <p>{{ error()! | translate }}</p>
     </div>
   } @else if (plant(); as p) {
-    <h2 class="plant-detail__title">{{ p.plant_name }}</h2>
-    <p class="plant-detail__location">{{ p.country }} - {{ p.city }}</p>
+    <h2 class="plant-detail__title">{{ p.name }}</h2>
+    <p class="plant-detail__location">{{ p.city }}, {{ p.country }}</p>
+    <p class="plant-detail__info">
+      {{ 'plants.peak_power' | translate }}: {{ p.peak_power }} kWp | {{ 'plants.created' | translate }}:
+      {{ p.create_date }}
+    </p>
 
     @if (energyOverview(); as overview) {
       <div class="plant-detail__stats">
+        <div class="stat-card">
+          <span class="stat-card__label">{{ 'dashboard.current_power' | translate }}</span>
+          <span class="stat-card__value">{{ overview.current_power }} W</span>
+        </div>
         <div class="stat-card">
           <span class="stat-card__label">{{ 'dashboard.today_energy' | translate }}</span>
           <span class="stat-card__value">{{ overview.today_energy }} kWh</span>
         </div>
         <div class="stat-card">
-          <span class="stat-card__label">{{ 'dashboard.current_power' | translate }}</span>
-          <span class="stat-card__value">{{ overview.current_power }} W</span>
+          <span class="stat-card__label">{{ 'dashboard.monthly_energy' | translate }}</span>
+          <span class="stat-card__value">{{ overview.monthly_energy }} kWh</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-card__label">{{ 'dashboard.yearly_energy' | translate }}</span>
+          <span class="stat-card__value">{{ overview.yearly_energy }} kWh</span>
         </div>
         <div class="stat-card">
           <span class="stat-card__label">{{ 'dashboard.total_energy' | translate }}</span>
           <span class="stat-card__value">{{ overview.total_energy }} kWh</span>
         </div>
         <div class="stat-card">
-          <span class="stat-card__label">{{ 'plants.total_income' | translate }}</span>
-          <span class="stat-card__value">{{ overview.total_income }}</span>
+          <span class="stat-card__label">{{ 'dashboard.carbon_offset' | translate }}</span>
+          <span class="stat-card__value">{{ overview.carbon_offset }} kg</span>
         </div>
       </div>
+
+      <p class="plant-detail__last-update">
+        {{ 'dashboard.last_update' | translate }}: {{ overview.last_update_time }}
+      </p>
     }
 
     @if (devices().length) {
@@ -39,8 +55,10 @@
       <div class="plant-detail__devices">
         @for (device of devices(); track device.device_sn) {
           <a class="device-card" [routerLink]="['/devices', device.device_sn]">
-            <span class="device-card__name">{{ device.device_name }}</span>
+            <span class="device-card__model">{{ device.model }}</span>
             <span class="device-card__sn">{{ device.device_sn }}</span>
+            <span class="device-card__manufacturer">{{ device.manufacturer }}</span>
+            <span class="device-card__update">{{ device.last_update_time }}</span>
           </a>
         }
       </div>

@@ -1,38 +1,40 @@
 // Tipos relacionados a plantas (usinas solares)
 
 export interface Plant {
-  plant_id: string;
-  plant_name: string;
+  plant_id: number;
+  name: string;
   status: number;
-  total_energy: number;
-  current_power: number;
+  total_energy: string;
+  current_power: string;
   country: string;
   city: string;
   create_date: string;
+  peak_power: number;
+  longitude: string;
+  latitude: string;
+  user_id: number;
+  locale: string;
+  operator: string;
+  installer: string;
+  image_url: string | null;
 }
 
-export interface PlantDetails extends Plant {
-  latitude: string;
-  longitude: string;
-  peak_power: number;
-  installed_capacity: number;
-  timezone: string;
-  image_url: string;
-  formula_money: string;
-  formula_money_str: string;
-  formula_co2: number;
-  formula_tree: number;
-  formula_coal: number;
+export interface PlantListData {
+  plants: Plant[];
+  count: number;
 }
 
 export interface PlantEnergyOverview {
-  today_energy: number;
-  month_energy: number;
-  year_energy: number;
-  total_energy: number;
+  peak_power_actual: number;
+  monthly_energy: string;
+  last_update_time: string;
   current_power: number;
-  today_income: number;
-  total_income: number;
+  timezone: string;
+  yearly_energy: string;
+  today_energy: string;
+  carbon_offset: string;
+  efficiency: string;
+  total_energy: string;
 }
 
 export interface PlantEnergyHistory {

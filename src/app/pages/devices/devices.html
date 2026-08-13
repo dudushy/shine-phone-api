@@ -14,11 +14,29 @@
       @for (device of devices(); track device.device_sn) {
         <a class="device-card" [routerLink]="['/devices', device.device_sn]">
           <div class="device-card__header">
-            <h3 class="device-card__name">{{ device.device_name }}</h3>
-            <span class="device-card__type">{{ getDeviceTypeLabel(device.device_type) }}</span>
+            <h3 class="device-card__name">{{ device.device_sn }}</h3>
+            <span class="device-card__type">{{ getDeviceTypeLabel(device.type) }}</span>
           </div>
-          <span class="device-card__sn">{{ device.device_sn }}</span>
-          <span class="device-card__update">{{ device.last_update_time }}</span>
+          <div class="device-card__body">
+            <div class="device-card__row">
+              <span class="device-card__label">Modelo:</span>
+              <span class="device-card__value">{{ device.model || '—' }}</span>
+            </div>
+            <div class="device-card__row">
+              <span class="device-card__label">Fabricante:</span>
+              <span class="device-card__value">{{ device.manufacturer }}</span>
+            </div>
+            <div class="device-card__row">
+              <span class="device-card__label">Datalogger:</span>
+              <span class="device-card__value">{{ device.datalogger_sn }}</span>
+            </div>
+          </div>
+          <div class="device-card__footer">
+            <span class="device-card__status" [class]="getStatusClass(device)">
+              {{ getStatusLabel(device.status) }}
+            </span>
+            <span class="device-card__update">{{ device.last_update_time }}</span>
+          </div>
         </a>
       } @empty {
         <p class="devices__empty">{{ 'devices.empty' | translate }}</p>

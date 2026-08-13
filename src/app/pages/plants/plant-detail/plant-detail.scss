@@ -14,6 +14,19 @@
 
   &__location {
     color: var(--color-text-secondary);
+    margin-bottom: var(--spacing-xs);
+  }
+
+  &__info {
+    font-size: var(--font-size-sm);
+    color: var(--color-text-secondary);
+    margin-bottom: var(--spacing-lg);
+  }
+
+  &__last-update {
+    font-size: var(--font-size-sm);
+    color: var(--color-text-secondary);
+    margin-top: var(--spacing-md);
     margin-bottom: var(--spacing-lg);
   }
 
@@ -101,5 +114,15 @@
     font-size: var(--font-size-xs);
     color: var(--color-text-secondary);
     font-family: monospace;
+  }
+
+  &__manufacturer {
+    font-size: var(--font-size-xs);
+    color: var(--color-text-secondary);
+  }
+
+  &__update {
+    font-size: var(--font-size-xs);
+    color: var(--color-text-secondary);
   }
 }
